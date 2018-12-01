@@ -46,16 +46,17 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
 
         // init theme with default finder
-        $this->app['turbo_sms'] = $this->app->share(
-                function ($app) {
+        $this->app['turbo_sms'] = $this->app->singleton(
+            TurboSms::class,
+            function ($app) {
 
-                    $login = $app['config']->get('turbo_sms.auth.login');
-                    $password = $app['config']->get('turbo_sms.auth.password');
-                    $sender = $app['config']->get('turbo_sms.sender');
-                    $url = $this->app['config']->get('turbo_sms.url', 'http://turbosms.in.ua/api/wsdl.html');
+                $login = $app['config']->get('turbo_sms.auth.login');
+                $password = $app['config']->get('turbo_sms.auth.password');
+                $sender = $app['config']->get('turbo_sms.sender');
+                $url = $this->app['config']->get('turbo_sms.url', 'http://turbosms.in.ua/api/wsdl.html');
 
-                    return new TurboSms($login, $password, $sender, $url);
-                }
+                return new TurboSms($login, $password, $sender, $url);
+            }
         );
 
 
