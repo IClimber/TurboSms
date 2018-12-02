@@ -46,8 +46,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
 
         // init theme with default finder
-        $this->app['turbo_sms'] = $this->app->singleton(
-            TurboSms::class,
+        $this->app->singleton(
+            'turbo_sms',
             function ($app) {
 
                 $login = $app['config']->get('turbo_sms.auth.login');
